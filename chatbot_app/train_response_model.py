@@ -11,8 +11,8 @@ try:
     # Load dataset
     data = pd.read_csv(dataset_path)
 
-    # Create a dictionary mapping intent to response
-    response_mapping = data.groupby('intent')['bot_response'].first().to_dict()
+    # Create a dictionary mapping intent to a list of responses
+    response_mapping = data.groupby('intent')['bot_response'].apply(list).to_dict()
 
     # Save the response mapping model
     with open(response_model_path, 'wb') as file:
